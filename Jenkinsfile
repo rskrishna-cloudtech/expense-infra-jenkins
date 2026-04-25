@@ -29,14 +29,15 @@ pipeline {
             }
         }
         stage('Deploy') {
+            input {
+                message "Should we proceed?"
+                ok "Yes, proceed"
+            }
             steps {
-                input{
-                    message "Should we proceed?"
-                    ok "Yes, proceed"
-                }
+
                 sh """
                 cd 01-vpc
-                terraform applt -auto-approve
+                terraform apply -auto-approve
                 """
             }
         }
